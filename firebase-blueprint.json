@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Maktab tizimi foydalanuvchisi",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string", "format": "uri" },
+        "role": { "type": "string", "enum": ["admin", "teacher", "student", "parent"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "News": {
+      "title": "News",
+      "description": "Maktab yangiliklari",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "image": { "type": "string", "format": "uri" },
+        "date": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "excerpt"]
+    },
+    "Gallery": {
+      "title": "Gallery",
+      "description": "Maktab fotogalereyasi",
+      "type": "object",
+      "properties": {
+        "src": { "type": "string", "format": "uri" },
+        "alt": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["src"]
+    },
+    "HeroSlide": {
+      "title": "HeroSlide",
+      "description": "Asosiy slayder rasmlari",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "image": { "type": "string", "format": "uri" },
+        "lang": { "type": "string", "enum": ["uz", "ru"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "image", "lang"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Foydalanuvchi profillari"
+    },
+    "/news/{newsId}": {
+      "schema": "News",
+      "description": "Yangiliklar to‘plami"
+    },
+    "/gallery/{imageId}": {
+      "schema": "Gallery",
+      "description": "Fotogalereya to‘plami"
+    },
+    "/hero_slides/{slideId}": {
+      "schema": "HeroSlide",
+      "description": "Asosiy slayder rasmlari to‘plami"
+    }
+  }
+}
